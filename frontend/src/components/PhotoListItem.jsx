@@ -8,8 +8,12 @@ const PhotoListItem = ({ imageSource, username, profile, location }) => {
       <div className="photo-list__user-details">
         <img src={profile} alt={`Profile picture of ${username}`} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <p className="photo-list__user-name">{username}</p>
-          <p className="photo-list__user-location">{location.city}, {location.country}</p>
+          <div className="photo-list__user-name">
+          {username}
+          </div>
+          <div className="photo-list__user-location">
+            {location.city}, {location.country}
+          </div>
         </div>
       </div>
     </div>
