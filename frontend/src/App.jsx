@@ -8,25 +8,20 @@ const sampleDataForPhotoListItem = {
     city: "Montreal",
     country: "Canada",
   },
-  urls: {
-    full: "/Image-1-Full.jpeg",
-    regular: "/Image-1-Regular.jpeg",
-  },
-  user: {
-    username: "exampleuser",
-    name: "Joe Example",
-    profile: "/profile-1.jpg",
-  },
+  imageSource: "/Image-1-Regular.jpeg",
+  username: "Joe Example",
+  profile: "/profile-1.jpg",
 };
+
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
     <div className="App">
       <PhotoListItem
-        imageSource={sampleDataForPhotoListItem.urls.regular}
-        username={sampleDataForPhotoListItem.user.name}
-        profile={sampleDataForPhotoListItem.user.profile}
+        imageSource={sampleDataForPhotoListItem.imageSource}
+        username={sampleDataForPhotoListItem.username}
+        profile={sampleDataForPhotoListItem.profile}
         location={sampleDataForPhotoListItem.location}
       />
     </div>
