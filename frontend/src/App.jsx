@@ -1,3 +1,5 @@
+import React from 'react';
+
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
 
@@ -5,9 +7,26 @@ import './App.scss';
 const App = () => {
   return (
     <div className="App">
-      <PhotoListItem/>
+      <PhotoListItem />
     </div>
   );
 };
 
 export default App;
+
+
+/* 
+import React from 'react';
+
+import PhotoListItem from './components/PhotoListItem';
+import './App.scss';
+
+// Note: Rendering a single component to build components in isolation
+const App = () => (
+  <div className="App">
+    <PhotoListItem/>
+  </div>
+)
+
+export default App
+*/
