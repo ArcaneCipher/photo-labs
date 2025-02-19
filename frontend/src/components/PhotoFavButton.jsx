@@ -6,7 +6,7 @@ const PhotoFavButton = () => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
+    setIsFavorited((prevIsFavorited) => !prevIsFavorited);
   };
 
   return (
