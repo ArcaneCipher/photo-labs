@@ -1,4 +1,3 @@
-import React from "react";
 import PhotoListItem from "./components/PhotoListItem";
 import "./App.scss";
 import photos from "./mocks/photos";
