@@ -1,7 +1,7 @@
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
-const PhotoList = ({ photos }) => {
+const PhotoList = ({ photos, favPhotos, toggleFavorite }) => {
   return (
     <ul className="photo-list">
       {photos.map((photoItem) => (
@@ -11,6 +11,8 @@ const PhotoList = ({ photos }) => {
         username={photoItem.user.name}
         profile={photoItem.user.profile}
         location={photoItem.location}
+        isFavorited={favPhotos[photoItem.id] || false}
+        toggleFavorite={() => toggleFavorite(photoItem.id)}
       />
       ))}
     </ul>

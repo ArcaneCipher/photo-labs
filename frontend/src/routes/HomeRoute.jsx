@@ -1,15 +1,13 @@
 import "../styles/HomeRoute.scss";
-import { useState } from "react";
 import TopNavigation from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 
-const HomeRoute = ({ topics, photos }) => { // Accept props from App.jsx
-  const [favPhotos, setFavPhotos] = useState([]);
+const HomeRoute = ({ topics, photos, favPhotos, toggleFavorite }) => { // Accept props from App.jsx
 
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} isFavPhotoExist={favPhotos.length > 0} /> {/* Pass topics to TopNavigation */}
-      <PhotoList photos={photos} /> {/* Pass photos to PhotoList */}
+      <TopNavigation topics={topics} isFavPhotoExist={Object.values(favPhotos).some(Boolean)} /> {/* Pass topics to TopNavigation */}
+      <PhotoList photos={photos} favPhotos={favPhotos} toggleFavorite={toggleFavorite} /> {/* Pass photos to PhotoList */}
     </div>
   );
 };
