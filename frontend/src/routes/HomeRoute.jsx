@@ -2,12 +2,29 @@ import "../styles/HomeRoute.scss";
 import TopNavigation from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 
-const HomeRoute = ({ topics, photos, favPhotos, toggleFavorite }) => { // Accept props from App.jsx
+const HomeRoute = ({
+  topics,
+  photos,
+  favPhotos,
+  toggleFavorite,
+  setSelectedPhoto,
+}) => {
+  // Accept props from App.jsx
 
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} isFavPhotoExist={Object.values(favPhotos).some(Boolean)} /> {/* Pass topics to TopNavigation */}
-      <PhotoList photos={photos} favPhotos={favPhotos} toggleFavorite={toggleFavorite} /> {/* Pass photos to PhotoList */}
+      {/* Pass topics to TopNavigation */}
+      <TopNavigation
+        topics={topics}
+        isFavPhotoExist={Object.values(favPhotos).some(Boolean)}
+      />{" "}
+      {/* Pass photos to PhotoList */}
+      <PhotoList
+        photos={photos}
+        favPhotos={favPhotos}
+        toggleFavorite={toggleFavorite}
+        setSelectedPhoto={setSelectedPhoto}
+      />{" "}
     </div>
   );
 };

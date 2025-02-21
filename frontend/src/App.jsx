@@ -1,6 +1,7 @@
 import "./App.scss";
 import { useState } from "react";
 import HomeRoute from "./routes/HomeRoute";
+import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 
 // Import the mock data
 import photos from "./mocks/photos";
@@ -9,6 +10,7 @@ import topics from "./mocks/topics";
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   const [favPhotos, setFavPhotos] = useState([]); // Global state for favorited photos
+  const [selectedPhoto, setSelectedPhoto] = useState(null); // State for modal
 
   // Function to toggle favorite status
   const toggleFavorite = (photoId) => {
@@ -25,7 +27,14 @@ const App = () => {
         photos={photos}
         favPhotos={favPhotos}
         toggleFavorite={toggleFavorite}
+        setSelectedPhoto={setSelectedPhoto}
       />
+      {selectedPhoto && (
+        <PhotoDetailsModal
+          selectedPhoto={selectedPhoto}
+          closeModal={() => setSelectedPhoto(null)} // Function to close modal
+        />
+      )}
     </div>
   );
 };
