@@ -11,7 +11,7 @@ const PhotoListItem = ({
   setSelectedPhoto,
 }) => {
   return (
-    <div className="photo-list__item" onClick={setSelectedPhoto}>
+    <div className="photo-list__item" onClick={() => setSelectedPhoto(photo)}>
       <PhotoFavButton
         isFavorited={isFavorited}
         toggleFavorite={toggleFavorite}
