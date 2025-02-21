@@ -13,7 +13,10 @@ const PhotoList = ({ photos, favPhotos, toggleFavorite, setSelectedPhoto }) => {
           location={photoItem.location}
           isFavorited={favPhotos[photoItem.id] || false}
           toggleFavorite={() => toggleFavorite(photoItem.id)}
-          setSelectedPhoto={() => setSelectedPhoto(photoItem)}
+          setSelectedPhoto={(photoItem) => {
+            console.log(`Selected Photo: ${photoItem}`);
+            setSelectedPhoto(photoItem)
+          }}
         />
       ))}
     </ul>
