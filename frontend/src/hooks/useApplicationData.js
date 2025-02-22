@@ -10,19 +10,24 @@ import topics from "../mocks/topics"; // Mock data
 const useApplicationData = () => {
   // State for favorite photos
   const [favPhotos, setFavPhotos] = useState({});
-  
+
   // State for selected photo in modal
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   /**
    * Toggles a photo's favorite status.
+   * If the photoId is not present, it will be added with a value of true.
    * @param {number} photoId - ID of the photo to toggle.
    */
   const updateToFavPhotoIds = (photoId) => {
-    setFavPhotos((prevFavPhotos) => ({
-      ...prevFavPhotos,
-      [photoId]: !prevFavPhotos[photoId], // Toggle true/false
-    }));
+    setFavPhotos((prevFavPhotos) => {
+      const isCurrentlyFavorited = prevFavPhotos[photoId] || false;
+
+      return {
+        ...prevFavPhotos,
+        [photoId]: !isCurrentlyFavorited, // Add as true if not present, otherwise toggle
+      };
+    });
   };
 
   /**
