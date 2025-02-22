@@ -1,6 +1,14 @@
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
+/**
+ * PhotoList Component - Renders a list of photo items.
+ *
+ * @param {Array} photos - List of photo objects to be displayed
+ * @param {Object} favPhotos - Object tracking favorite photos by their IDs
+ * @param {Function} toggleFavorite - Function to toggle favorite status of a photo
+ * @param {Function} setSelectedPhoto - Function to update the selected photo (for modal display)
+ */
 const PhotoList = ({ photos, favPhotos, toggleFavorite, setSelectedPhoto }) => {
   return (
     <ul className="photo-list">
@@ -11,11 +19,11 @@ const PhotoList = ({ photos, favPhotos, toggleFavorite, setSelectedPhoto }) => {
           username={photoItem.user.name}
           profile={photoItem.user.profile}
           location={photoItem.location}
-          isFavorited={favPhotos[photoItem.id] || false}
-          toggleFavorite={() => toggleFavorite(photoItem.id)}
+          isFavorited={favPhotos[photoItem.id] || false} // Check if the photo is in the favorite list
+          toggleFavorite={() => toggleFavorite(photoItem.id)} // Toggle favorite state for this photo
           setSelectedPhoto={() => {
-            console.log(`Selected Photo: ${photoItem}`);
-            setSelectedPhoto(photoItem)
+            console.log(`Selected Photo: ${photoItem}`); // Log selected photo for debugging
+            setSelectedPhoto(photoItem); // Set this photo as the selected one for the modal
           }}
         />
       ))}

@@ -3,25 +3,32 @@ import { useState } from "react";
 import HomeRoute from "./routes/HomeRoute";
 import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 
-// Import the mock data
+// Import the mock data for photos and topics
 import photos from "./mocks/photos";
 import topics from "./mocks/topics";
 
-// Note: Rendering a single component to build components in isolation
+// Root application component
 const App = () => {
-  const [favPhotos, setFavPhotos] = useState([]); // Global state for favorited photos
-  const [selectedPhoto, setSelectedPhoto] = useState(null); // State for modal
+  // State to track favorited photos
+  const [favPhotos, setFavPhotos] = useState([]);
 
-  // Function to toggle favorite status
+  // State to track the currently selected photo for the modal
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  /**
+   * Toggles the favorite status of a photo
+   * @param {number} photoId - The ID of the photo to toggle
+   */
   const toggleFavorite = (photoId) => {
     setFavPhotos((prevFavPhotos) => ({
       ...prevFavPhotos,
-      [photoId]: !prevFavPhotos[photoId], // Toggle true/false for each photoId
+      [photoId]: !prevFavPhotos[photoId], // Flip the favorite status for the given photo ID
     }));
   };
 
   return (
     <div className="App">
+      {/* Main home route that displays the photo list and navigation */}
       <HomeRoute
         topics={topics}
         photos={photos}
@@ -29,14 +36,16 @@ const App = () => {
         toggleFavorite={toggleFavorite}
         setSelectedPhoto={setSelectedPhoto}
       />
+
+      {/* Render the photo details modal only if a photo is selected */}
       {selectedPhoto && (
         <PhotoDetailsModal
           selectedPhoto={selectedPhoto}
-          closeModal={() => setSelectedPhoto(null)} // Function to close modal
-          similarPhotos={Object.values(selectedPhoto.similar_photos)} // Pass similar photos as prop
-          favPhotos={favPhotos} // Pass entire favPhotos state
-          toggleFavorite={toggleFavorite} // Pass function for similar photos too
-          setSelectedPhoto={setSelectedPhoto}
+          closeModal={() => setSelectedPhoto(null)} // Function to close the modal
+          similarPhotos={Object.values(selectedPhoto.similar_photos)} // Convert similar photos object into an array
+          favPhotos={favPhotos} // Pass current favorite photos state
+          toggleFavorite={toggleFavorite} // Pass function to toggle favorites
+          setSelectedPhoto={setSelectedPhoto} // Allow selection of similar photos inside the modal
         />
       )}
     </div>
