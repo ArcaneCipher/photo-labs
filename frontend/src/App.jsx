@@ -42,7 +42,7 @@ const App = () => {
         <PhotoDetailsModal
           selectedPhoto={selectedPhoto}
           closeModal={() => setSelectedPhoto(null)} // Function to close the modal
-          similarPhotos={Object.values(selectedPhoto.similar_photos)} // Convert similar photos object into an array
+          similarPhotos={Object.values(selectedPhoto.similar_photos|| {})} // Convert similar photos object into an array
           favPhotos={favPhotos} // Pass current favorite photos state
           toggleFavorite={toggleFavorite} // Pass function to toggle favorites
           setSelectedPhoto={setSelectedPhoto} // Allow selection of similar photos inside the modal
