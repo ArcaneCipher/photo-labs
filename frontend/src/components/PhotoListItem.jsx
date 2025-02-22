@@ -11,7 +11,7 @@ const PhotoListItem = ({
   setSelectedPhoto,
 }) => {
   return (
-    <div className="photo-list__item" onClick={() => setSelectedPhoto(photo)}>
+    <div className="photo-list__item">
       <PhotoFavButton
         isFavorited={isFavorited}
         toggleFavorite={toggleFavorite}
@@ -20,6 +20,7 @@ const PhotoListItem = ({
         src={photo}
         alt={`Photo taken by ${username}`}
         className="photo-list__image"
+        onClick={setSelectedPhoto}
       />
       <div className="photo-list__user-details">
         <img

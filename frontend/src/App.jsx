@@ -33,6 +33,10 @@ const App = () => {
         <PhotoDetailsModal
           selectedPhoto={selectedPhoto}
           closeModal={() => setSelectedPhoto(null)} // Function to close modal
+          similarPhotos={Object.values(selectedPhoto.similar_photos)} // Pass similar photos as prop
+          favPhotos={favPhotos} // Pass entire favPhotos state
+          toggleFavorite={toggleFavorite} // Pass function for similar photos too
+          setSelectedPhoto={setSelectedPhoto}
         />
       )}
     </div>
