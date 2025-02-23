@@ -9,15 +9,17 @@ import TopicListItem from "./TopicListItem";
  *   @param {string} topics.slug - Slug used for navigation or filtering
  *   @param {string} topics.title - Display title of the topic
  */
-const TopicList = ({ topics }) => {
+const TopicList = ({ topics, fetchPhotosByTopic }) => {
   return (
     <div className="top-nav-bar__topic-list">
       {/* Map through topics and render individual TopicListItem components */}
       {topics.map((topicItem) => (
         <TopicListItem
           key={topicItem.id} // Ensure unique key for React rendering
+          topicId={topicItem.id}
           slug={topicItem.slug}
           title={topicItem.title}
+          fetchPhotosByTopic={fetchPhotosByTopic}
         />
       ))}
     </div>

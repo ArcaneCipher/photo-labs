@@ -11,6 +11,7 @@ const App = () => {
     updateToFavPhotoIds,
     onPhotoSelect,
     onClosePhotoDetailsModal,
+    fetchPhotosByTopic,
   } = useApplicationData();
 
   return (
@@ -20,6 +21,7 @@ const App = () => {
         state={state}
         toggleFavorite={updateToFavPhotoIds}
         setSelectedPhoto={onPhotoSelect}
+        fetchPhotosByTopic={fetchPhotosByTopic}
       />
 
       {/* Render the photo details modal only if a photo is selected */}

@@ -15,6 +15,7 @@ const HomeRoute = ({
   state,
   toggleFavorite,
   setSelectedPhoto,
+  fetchPhotosByTopic,
 }) => {
   return (
     <div className="home-route">
@@ -22,6 +23,7 @@ const HomeRoute = ({
       <TopNavigation
         topics={state.topics}
         isFavPhotoExist={Object.values(state.favPhotos).some(Boolean)} // Check if any photo is favorited
+        fetchPhotosByTopic={fetchPhotosByTopic}
       />
 
       {/* Render the list of photos, passing necessary props */}

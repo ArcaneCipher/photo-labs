@@ -5,9 +5,9 @@ import "../styles/TopicListItem.scss";
  *
  * @param {string} title - The display title of the topic
  */
-const TopicListItem = ({ title }) => {
+const TopicListItem = ({ title, topicId, fetchPhotosByTopic }) => {
   return (
-    <div className="topic-list__item">
+    <div className="topic-list__item" onClick={() => fetchPhotosByTopic(topicId)}>
       {/* Display the topic title */}
       <span>{title}</span>
     </div>

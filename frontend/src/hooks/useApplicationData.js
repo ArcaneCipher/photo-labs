@@ -8,6 +8,7 @@ export const ACTIONS = {
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
   DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
+  SET_PHOTOS_BY_TOPIC: "SET_PHOTOS_BY_TOPIC",
 };
 
 // Define initial state as a separate constant
@@ -48,6 +49,9 @@ function reducer(state, action) {
 
     case ACTIONS.DISPLAY_PHOTO_DETAILS:
       return { ...state, selectedPhoto: action.payload.photo };
+
+    case ACTIONS.SET_PHOTOS_BY_TOPIC:
+      return { ...state, photos: action.payload.photos };
 
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
@@ -109,8 +113,18 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo: null } });
   };
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`/api/topics/${topicId}/photos`)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTOS_BY_TOPIC, payload: { photos: data } });
+      })
+      .catch((error) => console.error("Error fetching photos by topic:", error));
+  };
+
   return {
     state,
+    fetchPhotosByTopic,
     updateToFavPhotoIds,
     onPhotoSelect,
     onClosePhotoDetailsModal,

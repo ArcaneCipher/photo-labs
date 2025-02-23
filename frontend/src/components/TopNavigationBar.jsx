@@ -9,14 +9,14 @@ import TopicList from "./TopicList";
  * @param {Array} topics - Array of topic objects to display in the navigation
  * @param {boolean} isFavPhotoExist - Indicates if any photos have been favorited
  */
-const TopNavigation = ({ topics, isFavPhotoExist }) => {
+const TopNavigation = ({ topics, isFavPhotoExist, fetchPhotosByTopic }) => {
   return (
     <div className="top-nav-bar">
       {/* Application Logo */}
       <span className="top-nav-bar__logo">PhotoLabs</span>
 
       {/* Topic List Section */}
-      <TopicList topics={topics} />
+      <TopicList topics={topics} fetchPhotosByTopic={fetchPhotosByTopic}/>
 
       {/* Favorite Badge Indicator */}
       <FavBadge isFavPhotoExist={isFavPhotoExist} />
