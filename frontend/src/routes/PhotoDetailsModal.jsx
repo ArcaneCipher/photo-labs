@@ -7,21 +7,20 @@ import PhotoFavButton from "../components/PhotoFavButton";
  * PhotoDetailsModal Component - Displays detailed information about a selected photo.
  * Includes the full-size image, photographer details, and a list of similar photos.
  * 
- * @param {Object} selectedPhoto - The currently selected photo object
- * @param {Function} closeModal - Function to close the modal
- * @param {Array} similarPhotos - List of similar photos to display
- * @param {Function} toggleFavorite - Function to toggle favorite status of a photo
- * @param {Object} favPhotos - Object tracking favorite photos by their IDs
- * @param {Function} setSelectedPhoto - Function to update the selected photo (used for similar photos)
+ * @param {Object} props - Component props.
+ * @param {Object} props.state - Application state containing selected photo, favorites, etc.
+ * @param {Function} props.closeModal - Function to close the modal.
+ * @param {Function} props.toggleFavorite - Function to toggle favorite status of a photo.
+ * @param {Function} props.setSelectedPhoto - Function to update the selected photo (used for similar photos).
  */
 const PhotoDetailsModal = ({
-  selectedPhoto,
+  state,
   closeModal,
-  similarPhotos,
   toggleFavorite,
-  favPhotos,
   setSelectedPhoto,
 }) => {
+  const selectedPhoto = state.selectedPhoto;
+
   if (!selectedPhoto) return null; // Prevent rendering if no photo is selected
 
   return (
@@ -36,7 +35,7 @@ const PhotoDetailsModal = ({
           
           {/* Favorite button for the selected photo */}
           <PhotoFavButton
-            isFavorited={favPhotos[selectedPhoto.id] || false}
+            isFavorited={state.favPhotos[selectedPhoto.id] || false}
             toggleFavorite={(event) => {
               event.stopPropagation(); // Prevents modal from closing when clicking the favorite button
               toggleFavorite(selectedPhoto.id);
@@ -66,12 +65,12 @@ const PhotoDetailsModal = ({
           </div>
 
           {/* Display similar photos using PhotoList for consistency */}
-          {similarPhotos.length > 0 && (
+          {selectedPhoto.similarPhotos?.length > 0 && (
             <>
               <div className="photo-details-modal__header">Similar Photos</div>
               <PhotoList
-                photos={similarPhotos} // Pass similar photos to the PhotoList component
-                favPhotos={favPhotos} // Maintain favorite state
+                photos={selectedPhoto.similarPhotos} // Pass similar photos to the PhotoList component
+                favPhotos={state.favPhotos} // Maintain favorite state
                 toggleFavorite={toggleFavorite} // Allow favoriting similar photos
                 setSelectedPhoto={setSelectedPhoto} // Enable selecting similar photos
               />

@@ -7,7 +7,7 @@ import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 const App = () => {
   // Extract state and actions from the custom hook
   const {
-    state: { photos, topics, favPhotos, selectedPhoto },
+    state,
     updateToFavPhotoIds,
     onPhotoSelect,
     onClosePhotoDetailsModal,
@@ -17,20 +17,16 @@ const App = () => {
     <div className="App">
       {/* Main home route that displays the photo list and navigation */}
       <HomeRoute
-        topics={topics}
-        photos={photos}
-        favPhotos={favPhotos}
+        state={state}
         toggleFavorite={updateToFavPhotoIds}
         setSelectedPhoto={onPhotoSelect}
       />
 
       {/* Render the photo details modal only if a photo is selected */}
-      {selectedPhoto && (
+      {state.selectedPhoto && (
         <PhotoDetailsModal
-          selectedPhoto={selectedPhoto}
+          state={state}
           closeModal={onClosePhotoDetailsModal} // Function to close the modal
-          similarPhotos={Object.values(selectedPhoto.similar_photos|| {})} // Convert similar photos object into an array
-          favPhotos={favPhotos} // Pass current favorite photos state
           toggleFavorite={updateToFavPhotoIds} // Pass function to toggle favorites
           setSelectedPhoto={onPhotoSelect} // Allow selection of similar photos inside the modal
         />

@@ -1,6 +1,4 @@
-import { useReducer } from "react";
-import photos from "../mocks/photos"; // Mock data
-import topics from "../mocks/topics"; // Mock data
+import { useReducer, useEffect } from "react";
 
 // Define action types
 export const ACTIONS = {
@@ -14,8 +12,8 @@ export const ACTIONS = {
 
 // Define initial state as a separate constant
 const initialState = {
-  photos: photos,
-  topics: topics,
+  photos: [],
+  topics: [],
   favPhotos: {},
   selectedPhoto: null,
 };
@@ -63,6 +61,26 @@ function reducer(state, action) {
  */
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Fetch topics from API
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics: data } });
+      })
+      .catch((error) => console.error("Error fetching topics:", error));
+  }, []);
+
+  // Fetch photos from API
+  useEffect(() => {
+    fetch("/api/photos") // Fetching data from backend
+      .then((response) => response.json()) // Convert response to JSON
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos: data } }); // Dispatch action to store data
+      })
+      .catch((error) => console.error("Error fetching photos:", error));
+  }, []);
 
   /**
    * Toggles a photo's favorite status.
