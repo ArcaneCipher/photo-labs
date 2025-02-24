@@ -158,15 +158,15 @@ npm run test
 
 ### **Main Page**
 
-![Main Page](./images/main.png)
+![Main Page](./docs/main-page.png)
 
 ### **Modal Display**
 
-![Modal Display](./images/modal.png)
+![Modal Display](./docs/modal-display.png)
 
 ### **Favorite Image**
 
-![Favorite Image](./images/like.png)
+![Favorite Image](./docs/photo-likes.png)
 
 ---
 
