@@ -20,8 +20,10 @@ const PhotoDetailsModal = ({
   setSelectedPhoto,
 }) => {
   const selectedPhoto = state.selectedPhoto;
-
+ 
   if (!selectedPhoto) return null; // Prevent rendering if no photo is selected
+
+  const similarPhotos = selectedPhoto.similar_photos || [];
 
   return (
     <div className="photo-details-modal">
@@ -65,11 +67,11 @@ const PhotoDetailsModal = ({
           </div>
 
           {/* Display similar photos using PhotoList for consistency */}
-          {selectedPhoto.similar_photos?.length > 0 && (
+          {similarPhotos.length > 0 && (
             <>
               <div className="photo-details-modal__header">Similar Photos</div>
               <PhotoList
-                photos={selectedPhoto.similar_photos} // Pass similar photos to the PhotoList component
+                photos={similarPhotos} // Pass similar photos to the PhotoList component
                 favPhotos={state.favPhotos} // Maintain favorite state
                 toggleFavorite={toggleFavorite} // Allow favoriting similar photos
                 setSelectedPhoto={setSelectedPhoto} // Enable selecting similar photos

@@ -102,8 +102,18 @@ const useApplicationData = () => {
    * Handles photo selection, setting it in the modal.
    * @param {Object} photo - The selected photo object.
    */
-  const onPhotoSelect = (photo) => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: { photo } });
+  const onPhotoSelect = (photo) => {  
+    // Find the selected photo in the existing photos array
+    const existingPhoto = state.photos.find(p => p.id === photo.id);
+  
+    if (existingPhoto) {
+      dispatch({ 
+        type: ACTIONS.SELECT_PHOTO, 
+        payload: { photo: existingPhoto } 
+      });
+    } else {
+      console.error("Photo not found in state.photos. Check if photos have loaded properly.");
+    }
   };
 
   /**
@@ -117,9 +127,14 @@ const useApplicationData = () => {
     fetch(`/api/topics/${topicId}/photos`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: ACTIONS.SET_PHOTOS_BY_TOPIC, payload: { photos: data } });
+        dispatch({
+          type: ACTIONS.SET_PHOTOS_BY_TOPIC,
+          payload: { photos: data },
+        });
       })
-      .catch((error) => console.error("Error fetching photos by topic:", error));
+      .catch((error) =>
+        console.error("Error fetching photos by topic:", error)
+      );
   };
 
   return {

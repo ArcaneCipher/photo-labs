@@ -21,9 +21,12 @@ const PhotoList = ({ photos, favPhotos, toggleFavorite, setSelectedPhoto }) => {
           location={photoItem.location}
           isFavorited={favPhotos[photoItem.id] || false} // Check if the photo is in the favorite list
           toggleFavorite={() => toggleFavorite(photoItem.id)} // Toggle favorite state for this photo
-          setSelectedPhoto={() => {
-            setSelectedPhoto(photoItem); // Set this photo as the selected one for the modal
-          }}
+          setSelectedPhoto={() => 
+            setSelectedPhoto({
+              ...photoItem,
+              similar_photos: photoItem.similar_photos || [],
+            })
+          } // Set this photo as the selected one for the modal
         />
       ))}
     </ul>
