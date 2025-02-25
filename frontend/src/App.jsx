@@ -12,16 +12,19 @@ const App = () => {
     onPhotoSelect,
     onClosePhotoDetailsModal,
     fetchPhotosByTopic,
+    fetchPhotosBySearch,
   } = useApplicationData();
 
   return (
     <div className="App">
+
       {/* Main home route that displays the photo list and navigation */}
       <HomeRoute
         state={state}
         toggleFavorite={updateToFavPhotoIds}
         setSelectedPhoto={onPhotoSelect}
         fetchPhotosByTopic={fetchPhotosByTopic}
+        fetchPhotosBySearch={fetchPhotosBySearch}
       />
 
       {/* Render the photo details modal only if a photo is selected */}

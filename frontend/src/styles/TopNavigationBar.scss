@@ -18,3 +18,15 @@
   text-underline-position: auto;
   margin-left: 24px;
 }
+
+.top-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+}

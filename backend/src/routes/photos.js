@@ -60,5 +60,65 @@ module.exports = db => {
     });
   });
 
+  // Search photos route
+  router.get("/photos/search", (request, response) => {
+    const protocol = request.protocol;
+    const host = request.hostname;
+    const port = process.env.PORT || 8001;
+    const serverUrl = `${protocol}://${host}:${port}`;
+  
+    const { fullname, city, country } = request.query;
+  
+    let query = `
+      SELECT 
+        json_agg(
+          json_build_object(
+            'id', photo.id,
+            'urls', json_build_object(
+              'full', concat('${serverUrl}/images/', photo.full_url),
+              'regular', concat('${serverUrl}/images/', photo.regular_url)
+            ),
+            'user', json_build_object(
+              'username', user_account.username,
+              'name', user_account.fullname,
+              'profile', concat('${serverUrl}/images/', user_account.profile_url)
+            ),
+            'location', json_build_object(
+              'city', photo.city,
+              'country', photo.country
+            )
+          )
+        ) as photo_data
+      FROM photo
+      JOIN user_account ON user_account.id = photo.user_id
+      WHERE 1=1
+    `;
+  
+    // Dynamic WHERE conditions based on provided search parameters
+    const queryParams = [];
+  
+    if (fullname) {
+      queryParams.push(` user_account.fullname ILIKE '%${fullname}%' `);
+    }
+    if (city) {
+      queryParams.push(` photo.city ILIKE '%${city}%' `);
+    }
+    if (country) {
+      queryParams.push(` photo.country ILIKE '%${country}%' `);
+    }
+  
+    if (queryParams.length > 0) {
+      query += ` AND ${queryParams.join(" AND ")}`;
+    }
+  
+    db.query(query).then(({ rows }) => {
+      response.json(rows[0]?.photo_data || []);
+    }).catch((error) => {
+      console.error("Error executing search query:", error);
+      response.status(500).json({ error: "Internal server error" });
+    });
+  });
+  
+
   return router;
 };

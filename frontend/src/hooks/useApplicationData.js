@@ -137,12 +137,25 @@ const useApplicationData = () => {
       );
   };
 
+  const fetchPhotosBySearch = (searchType, searchTerm) => {
+    // Convert "name" to match the backend query parameter
+    const backendSearchType = searchType === "name" ? "fullname" : searchType;
+  
+    fetch(`/api/photos/search?${backendSearchType}=${encodeURIComponent(searchTerm)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: { photos: data } });
+      })
+      .catch((error) => console.error("Error fetching search results:", error));
+  };
+
   return {
     state,
     fetchPhotosByTopic,
     updateToFavPhotoIds,
     onPhotoSelect,
     onClosePhotoDetailsModal,
+    fetchPhotosBySearch,
   };
 };
 
