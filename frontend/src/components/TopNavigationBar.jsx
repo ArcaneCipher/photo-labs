@@ -16,7 +16,6 @@ const TopNavigation = ({
   fetchPhotosByTopic,
   onSearch,
 }) => {
-  console.log("TopNavigation received onSearch:", onSearch); // Debugging log
 
   return (
     <div className="top-nav-bar">
